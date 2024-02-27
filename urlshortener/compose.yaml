@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: systemdesign
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  url-shortener-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: url-shortener-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/systemdesign
+      SPRING_DATASOURCE_USERNAME: test
+      SPRING_DATASOURCE_PASSWORD: test
+
+volumes:
+  mysql_data:
