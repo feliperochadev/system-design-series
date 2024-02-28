@@ -8,7 +8,7 @@ workspace {
                 user -> this "1 - Submits a long URL"
                 this -> user "3 - Returns a short URL"
                 user -> this "4 - Access the short URL"
-                this -> external-system "6 - Redirect to the external Web Application"
+                this -> external-system "6 - Redirects to external link"
             }
             database = container "Database" " " " " "Database" {
                 webapp -> this "2 - Writes short URI"
