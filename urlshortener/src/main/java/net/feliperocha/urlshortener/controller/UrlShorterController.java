@@ -14,7 +14,7 @@ public class UrlShorterController {
 
     private final UrlShorterService service;
 
-    @PostMapping("/api/v1/shorten")
+    @PostMapping("/api/v1/short")
     public String shortenUrl(@RequestParam("longUrl") String longUrl) {
         return service.shortenUrl(longUrl);
     }
