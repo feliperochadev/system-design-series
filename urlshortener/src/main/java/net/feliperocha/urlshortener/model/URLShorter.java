@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Getter
 @RequiredArgsConstructor
-public class UrlShorter {
+public class URLShorter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class UrlShorter {
     private String longURL;
     private String shortURLId;
 
-    public UrlShorter(String longURL) {
+    public URLShorter(String longURL) {
         this.longURL = longURL;
         this.shortURLId = UUID.randomUUID().toString();
     }

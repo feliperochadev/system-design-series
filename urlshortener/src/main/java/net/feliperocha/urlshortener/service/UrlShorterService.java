@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import net.feliperocha.urlshortener.repository.UrlShorterRepository;
-import net.feliperocha.urlshortener.model.UrlShorter;
+import net.feliperocha.urlshortener.model.URLShorter;
 
 
 @Service
@@ -24,7 +24,7 @@ public class UrlShorterService {
             return buildShortURL(optionalUrlShorter.get().getShortURLId());
         }
 
-        var urlShorter = repository.save(new UrlShorter(longUrl));
+        var urlShorter = repository.save(new URLShorter(longUrl));
         return buildShortURL(urlShorter.getShortURLId());
     }
 
