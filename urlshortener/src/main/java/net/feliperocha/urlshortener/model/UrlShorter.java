@@ -8,8 +8,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class UrlShorter {
 
@@ -18,5 +17,10 @@ public class UrlShorter {
     private Long id;
 
     private String longURL;
-    private String shortURL;
+    private String shortURLId;
+
+    public UrlShorter(longURL) {
+        this.longURL = longURL;
+        this.shortURLId = UUID.randomUUID().toString();
+    }
 }
