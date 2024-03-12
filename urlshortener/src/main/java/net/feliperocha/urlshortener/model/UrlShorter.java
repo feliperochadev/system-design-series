@@ -18,5 +18,5 @@ public class UrlShorter {
     private Long id;
 
     private String longURL;
-    private String shortURI;
+    private String shortURL;
 }
