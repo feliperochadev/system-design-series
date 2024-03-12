@@ -25,12 +25,12 @@ public class UrlShorterService {
         if (optionalUrlShorter.isEmpty()) {
             var urlShorter = new UrlShorter();
             urlShorter.setLongURL(longUrl);
-            urlShorter.setShortURI(UUID.randomUUID().toString());
+            urlShorter.setShortURL(UUID.randomUUID().toString());
             repository.save(urlShorter);
-            return buildURL(urlShorter.getShortURI());
+            return buildURL(urlShorter.getShortURL());
         }
         
-        return buildURL(optionalUrlShorter.get().getShortURI());
+        return buildURL(optionalUrlShorter.get().getShortURL());
     }
 
     public Optional<String> getLongUrl(String shortUrl) {
