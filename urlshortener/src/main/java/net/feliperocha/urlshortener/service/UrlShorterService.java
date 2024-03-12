@@ -16,30 +16,26 @@ public class UrlShorterService {
 
     private final UrlShorterRepository repository;
 
-    @Value("urlshortener.basepath")
-    private final String BASE_PATH;
+    @Value("urlshortener.baseshorturlpath")
+    private final String BASE_SHORT_URL_PATH;
 
     public String shortenUrl(String longUrl) {
         var optionalUrlShorter = repository.findByLongUrl(longUrl);
-
-        if (optionalUrlShorter.isEmpty()) {
-            var urlShorter = new UrlShorter();
-            urlShorter.setLongURL(longUrl);
-            urlShorter.setShortURL(UUID.randomUUID().toString());
-            repository.save(urlShorter);
-            return buildURL(urlShorter.getShortURL());
+        if (optionalUrlShorter.isPresent()) {
+            return buildShortURL(optionalUrlShorter.get().getShortURL());
         }
-        
-        return buildURL(optionalUrlShorter.get().getShortURL());
+
+        var urlShorter = repository.save(new UrlShorter(longUrl));
+        return buildShortURL(urlShorter.getShortURL());
     }
 
-    public Optional<String> getLongUrl(String shortUrl) {
-        return repository.findByShortUrl(shortUrl)
+    public Optional<String> getLongUrl(String shortUrlId) {
+        return repository.findByShortUrlId(shortUrlId)
                 .flatMap(urlShorter -> Optional.of(urlShorter.getLongURL()));
     }
 
-    private String buildURL(String URL) {
-        return BASE_PATH + "/" + URL;
+    private String buildShortURL(String shortUrlId) {
+        return BASE_SHORT_URL_PATH + "/" + shortUrlId;
     }
 }
 
