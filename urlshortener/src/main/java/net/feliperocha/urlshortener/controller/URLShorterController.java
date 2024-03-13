@@ -6,22 +6,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import net.feliperocha.urlshortener.service.UrlShorterService;
+import net.feliperocha.urlshortener.service.URLShorterService;
 
 @RestController
 @RequiredArgsConstructor
-public class UrlShorterController {
+public class URLShorterController {
 
-    private final UrlShorterService service;
+    private final URLShorterService service;
 
     @PostMapping("/api/v1/short")
-    public String shortenUrl(@RequestParam("longUrl") String longUrl) {
-        return service.shortenUrl(longUrl);
+    public String shortenUrl(@RequestParam("longUrl") String longURL) {
+        return service.shortenURL(longURL);
     }
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity redirect(@PathVariable("shortUrl") String shortUrl) {
-        return service.getLongUrl(shortUrl)
+    public ResponseEntity redirect(@PathVariable("shortUrl") String shortURL) {
+        return service.getLongURL(shortURL)
                 .map(longUrl -> ResponseEntity
                         .status(HttpStatus.MOVED_PERMANENTLY)
                         .header(HttpHeaders.LOCATION, longUrl)
